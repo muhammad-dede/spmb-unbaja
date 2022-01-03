@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -38,13 +39,15 @@ class DaftarController extends Controller
             'password.confirmed' => 'Konfirmasi password tidak sama',
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => ucwords($request->name),
             'phone' => $request->phone,
             'email' => strtolower($request->email),
             'avatar' => url('/avatar/default.svg'),
             'password' => Hash::make($request->password),
         ]);
+
+        event(new Registered($user));
 
         return redirect()->route('masuk')->with('success', 'Berhasil mendaftar. Silahkan masuk dengan akunmu!');
     }

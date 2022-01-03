@@ -15,10 +15,14 @@ class EventServiceProvider extends ServiceProvider
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
+        'Illuminate\Auth\Events\Verified' => [
+            'App\Listeners\LogVerifiedUser',
+        ],
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
     ];
+
 
     /**
      * Register any events for your application.

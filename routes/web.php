@@ -3,11 +3,15 @@
 use App\Http\Controllers\Application\HomeController;
 use App\Http\Controllers\Auth\DaftarController;
 use App\Http\Controllers\Auth\KeluarController;
+use App\Http\Controllers\Auth\LupaPasswordController;
 use App\Http\Controllers\Auth\MasukController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\SocialiteController;
+use App\Http\Controllers\Auth\VerifikasiController;
 use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 
+// Group Not Loged In
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/', [WebController::class, 'index'])->name('index');
     Route::get('/fakultas', [WebController::class, 'fakultas'])->name('fakultas');
@@ -22,10 +26,24 @@ Route::group(['middleware' => 'guest'], function () {
     // Google Masuk/Daftar
     Route::get('/auth/google', [SocialiteController::class, 'redirectToGoogle'])->name('auth.google');
     Route::get('/auth/google/callback', [SocialiteController::class, 'handleGoogleCallback'])->name('auth.google.callback');
+    // Lupa Password
+    Route::get('/lupa-password', [LupaPasswordController::class, 'request'])->name('password.request');
+    Route::post('/lupa-password', [LupaPasswordController::class, 'email'])->name('password.email');
+    // Reset Password
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'reset'])->name('password.reset');
+    Route::post('/reset-password', [ResetPasswordController::class, 'update'])->name('password.update');
 });
 
-
+// Group Loged In
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', HomeController::class)->name('home');
-    Route::post('/keluar', KeluarController::class)->name('keluar');
+    // Verifikasi Email
+    Route::get('/email/verify', [VerifikasiController::class, 'notice'])->name('verification.notice');
+    Route::get('/email/verify/{id}/{hash}', [VerifikasiController::class, 'verify'])->middleware('signed')->name('verification.verify');
+    Route::post('/email/verification-notification', [VerifikasiController::class, 'send'])->middleware('throttle:6,1')->name('verification.send');
+
+    // Group App Route
+    Route::group(['middleware' => 'verified'], function () {
+        Route::get('/home', HomeController::class)->name('home');
+        Route::post('/keluar', KeluarController::class)->name('keluar');
+    });
 });

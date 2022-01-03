@@ -35,7 +35,7 @@
                 <div class="fv-row mb-10">
                     <div class="d-flex flex-stack mb-2">
                         <label class="form-label fw-bolder text-dark fs-6 mb-0" for="password">Password</label>
-                        <a href="#" class="link-primary fs-6 fw-bolder">Lupa Password ?</a>
+                        <a href="{{ route('password.request') }}" class="link-primary fs-6 fw-bolder">Lupa Password ?</a>
                     </div>
                     <input class="form-control form-control-lg form-control-solid" type="password" name="password"
                         autocomplete="off" id="password" />
@@ -59,7 +59,3 @@
         </div>
     </div>
 @endsection
-
-@push('my-js')
-    {{-- <script src="{{ asset('') }}public/templates/app/dist/assets/js/custom/authentication/sign-in/general.js"></script> --}}
-@endpush
