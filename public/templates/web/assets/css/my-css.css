@@ -1,0 +1,44 @@
+.whats-float {
+    position: fixed;
+    transform: translate(108px, 0px);
+    top: 25%;
+    right: 0;
+    width: 150px;
+    overflow: hidden;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 4px 0 0 4px;
+    z-index: 10;
+    transition: all 0.5s ease-in-out;
+    vertical-align: middle;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.whats-float a span {
+    color: white;
+    font-size: 15px;
+    position: absolute;
+    line-height: 16px;
+    font-weight: bolder;
+}
+
+.whats-float i {
+    font-size: 30px;
+    color: white;
+    line-height: 30px;
+    padding: 10px;
+    transform: rotate(0deg);
+    transition: all 0.5s ease-in-out;
+    text-align: center;
+
+}
+
+.whats-float:hover {
+    color: #FFFFFF;
+    transform: translate(0px, 0px);
+}
+
+.whats-float:hover i {
+    transform: rotate(360deg);
+}
