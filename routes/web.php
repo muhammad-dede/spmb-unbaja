@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Application\HomeController;
+use App\Http\Controllers\Application\UpdateDataDiriController;
 use App\Http\Controllers\Auth\DaftarController;
 use App\Http\Controllers\Auth\KeluarController;
 use App\Http\Controllers\Auth\LupaPasswordController;
@@ -41,9 +42,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/email/verify/{id}/{hash}', [VerifikasiController::class, 'verify'])->middleware('signed')->name('verification.verify');
     Route::post('/email/verification-notification', [VerifikasiController::class, 'send'])->middleware('throttle:6,1')->name('verification.send');
 
-    // Group App Route
-    Route::group(['middleware' => 'verified'], function () {
-        Route::get('/home', HomeController::class)->name('home');
-        Route::post('/keluar', KeluarController::class)->name('keluar');
+    Route::group(['middleware' => 'user_has_no_data'], function () {
+        Route::get('/update-data-diri', [UpdateDataDiriController::class, 'edit'])->name('update-data-diri');
+        Route::post('/update-data-diri', [UpdateDataDiriController::class, 'update'])->name('update-data-diri');
     });
+
+    // Group App Route
+    Route::group(['middleware' => ['verified', 'user_has_data']], function () {
+        Route::get('/home', HomeController::class)->name('home');
+    });
+
+    Route::post('/keluar', KeluarController::class)->name('keluar');
 });
