@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\MasukController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Auth\VerifikasiController;
+use App\Http\Controllers\MasterController;
 use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'user_has_no_data'], function () {
         Route::get('/update-data-diri', [UpdateDataDiriController::class, 'edit'])->name('update-data-diri');
         Route::post('/update-data-diri', [UpdateDataDiriController::class, 'update'])->name('update-data-diri');
+        Route::post('/update-data-diri/validasi/data-diri', [UpdateDataDiriController::class, 'ajaxValidateDataDiri'])->name('update-data-diri.validate.data-diri');
+        Route::post('/update-data-diri/validasi/data-ortu', [UpdateDataDiriController::class, 'ajaxValidateDataOrtu'])->name('update-data-diri.validate.data-ortu');
     });
 
     // Group App Route
@@ -53,4 +56,8 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::post('/keluar', KeluarController::class)->name('keluar');
+});
+
+Route::group(['prefix' => 'master', 'as' => 'master.'], function () {
+    Route::get('/get-wilayah/{id}', [MasterController::class, 'getWilayah'])->name('get-wilayah');
 });
