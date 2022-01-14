@@ -22,7 +22,7 @@
             <div class="container">
 
                 <div class="section-title" data-aos="fade-up">
-                    <h2>Contact Us</h2>
+                    <h2>Kontak Kami</h2>
                     <p>Kampus 1</p>
                 </div>
 
@@ -66,7 +66,7 @@
             <div class="container">
 
                 <div class="section-title" data-aos="fade-up">
-                    <h2>Contact Us</h2>
+                    <h2>Kontak Kami</h2>
                     <p>Kampus 2</p>
                 </div>
 

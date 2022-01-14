@@ -532,7 +532,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 575px) {
     #hero .hero-img img {
-        width: 80%;
+        width: 100%;
     }
 }
 
@@ -785,7 +785,7 @@ section {
 }
 
 .about ul li {
-    margin-bottom: 18px;
+    margin-bottom: 12px;
     color: #142B72;
 }
 
@@ -994,7 +994,8 @@ section {
 --------------------------------------------------------------*/
 .counts {
     background: #fff;
-    padding: 60px 0 60px;
+    padding: 0;
+    /* padding: 60px 0 60px; */
 }
 
 .counts .count-box {
@@ -1095,7 +1096,8 @@ section {
 --------------------------------------------------------------*/
 .testimonials {
     padding: 80px 0;
-    background: url("../img/cta-bg.jpg") no-repeat;
+    /* background: url("../img/cta-bg.jpg") no-repeat; */
+    background-color: #fff;
     background-position: center center;
     background-size: cover;
     position: relative;
@@ -1126,7 +1128,7 @@ section {
 
 .testimonials .testimonial-item .testimonial-img {
     width: 100px;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     border: 6px solid rgba(255, 255, 255, 0.15);
     margin: 0 auto;
 }

@@ -22,7 +22,7 @@
             <div class="container">
 
                 <div class="section-title" data-aos="fade-up">
-                    <h2>Frequently Asked Questions</h2>
+                    <h2>Tanya Jawab</h2>
                     <p>Apa yang bisa kami bantu?</p>
                 </div>
 
